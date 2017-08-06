@@ -1,8 +1,11 @@
 module Node.PathTest exposing (all)
 
+import Task
+
 import Ordeal exposing (..)
 
 import Node.Path as Path
+import Node.Process as Process
 
 defaultFormatted: Path.Formatted
 defaultFormatted = Path.defaultFormatted
@@ -93,9 +96,15 @@ all =
       success
       |> andThen (Path.resolve ["/foo/bar", "./baz"] |> shouldEqual "/foo/bar/baz")
       |> andThen (Path.resolve ["/foo/bar", "/tmp/file/"] |> shouldEqual "/tmp/file")
+      |> andThen (Path.resolve1 "/foo" |> shouldEqual "/foo")
       |> andThen (Path.resolve2 "/foo" "bar" |> shouldEqual "/foo/bar")
       |> andThen (Path.resolve3 "/foo" "bar" "baz/asdf" |> shouldEqual "/foo/bar/baz/asdf")
       |> andThen (Path.resolve4 "/foo" "bar" "baz/asdf" "quux" |> shouldEqual "/foo/bar/baz/asdf/quux")
       |> andThen (Path.resolve5 "/foo" "bar" "baz/asdf" "quux" ".." |> shouldEqual "/foo/bar/baz/asdf")
+      |> andThen (
+        Process.cwd
+        |> Task.mapError (\_ -> "Never")
+        |> andTest (shouldEqual <| Path.resolve1 ".")
+      )
     )
     ]

@@ -6,10 +6,12 @@ module Node.Util exposing
   , inspectLog
   )
 
-{-| The util module is primarily designed to support the needs of Node.js' own internal APIs. However, many of the utilities are useful for application and module developers as well.
+{-|
+Node API: https://nodejs.org/docs/latest/api/util.html
+
+The util module is primarily designed to support the needs of Node.js' own internal APIs. However, many of the utilities are useful for application and module developers as well.
 
 @docs Depth, Options, defaultOptions, inspect, inspectLog
-
 -}
 
 import Json.Encode as Encode
@@ -54,6 +56,9 @@ inspectLog: Maybe Options -> a -> a
 inspectLog options value =
   Native.Node.Util.inspectLog value (encodeMaybeOptions options)
 
+
+-- -----------------------------------------------------------------------------
+-- JSON
 
 encodeDepth: Depth -> Encode.Value
 encodeDepth depth =

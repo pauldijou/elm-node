@@ -20,19 +20,19 @@ module Node.Path exposing
   , join3
   , join4
   , join5
+  , resolve1
   , resolve2
   , resolve3
   , resolve4
   , resolve5
   )
 
-{-| The path module provides utilities for working with file and directory paths.
-
-
+{-|
 Node API: https://nodejs.org/docs/latest/api/path.html
 
-@docs Formatted, defaultFormatted, Parsed, basename, basenameExt, delimiter, dirname, extname, format, isAbsolute, join, normalize, parse, relative, relativeTo, resolve, sep, join2, join3, join4, join5, resolve2, resolve3, resolve4, resolve5
+The path module provides utilities for working with file and directory paths.
 
+@docs Formatted, defaultFormatted, Parsed, basename, basenameExt, delimiter, dirname, extname, format, isAbsolute, join, normalize, parse, relative, relativeTo, resolve, sep, join2, join3, join4, join5, resolve1, resolve2, resolve3, resolve4, resolve5
 -}
 
 import Json.Encode as Encode
@@ -146,6 +146,10 @@ join5: String -> String -> String -> String -> String -> String
 join5 p1 p2 p3 p4 p5 = join [p1, p2, p3, p4, p5]
 
 {-| -}
+resolve1: String -> String
+resolve1 p1 = resolve [p1]
+
+{-| -}
 resolve2: String -> String -> String
 resolve2 p1 p2 = resolve [p1, p2]
 
@@ -162,6 +166,8 @@ resolve5: String -> String -> String -> String -> String -> String
 resolve5 p1 p2 p3 p4 p5 = resolve [p1, p2, p3, p4, p5]
 
 
+-- -----------------------------------------------------------------------------
+-- JSON
 
 encodeFormatted: Formatted -> Encode.Value
 encodeFormatted formatObject =

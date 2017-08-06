@@ -34,8 +34,8 @@ module Node.Process exposing
   , versions
   )
 
-{-| https://nodejs.org/docs/latest/api/process.html
-
+{-|
+Node API: https://nodejs.org/docs/latest/api/process.html
 
 # Types
 
@@ -44,7 +44,6 @@ module Node.Process exposing
 # Functions
 
 @docs abort, arch, argv, argv0, chdir, config, connected, cpuUsage, cpuUsageSince, cwd, disconnect, env, execArgv, execPath, exit, hrtime, hrtimeSince, kill, killWith, memoryUsage, pid, platform, release, title, withTitle, uptime, version, versions
-
 -}
 
 import Task exposing (Task)

@@ -10,16 +10,19 @@ module Node.ExitCodes exposing
   , invalidDebugArgument
   )
 
-{-| https://nodejs.org/docs/latest/api/process.html#process_exit_codes
-
+{-|
+Node API: https://nodejs.org/docs/latest/api/process.html#process_exit_codes
 
 @docs uncaughtFatalException, internalJavaScriptParseError, internalJavaScriptEvaluationFailure, fatalError, nonFunctionInternalExceptionHandler, internalExceptionHandlerRunTimeFailure, invalidArgument, internalJavaScriptRunTimeFailure, invalidDebugArgument
-
 -}
 
 {-| -}
+ok: Int
+ok = 0
+
+{-| -}
 uncaughtFatalException: Int
-uncaughtFatalException = 0
+uncaughtFatalException = 1
 
 {-| -}
 internalJavaScriptParseError: Int
