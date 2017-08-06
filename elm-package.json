@@ -1,0 +1,26 @@
+{
+  "version": "0.0.1",
+  "summary": "Elm interface on top of Node APIs",
+  "repository": "https://github.com/pauldijou/elm-node.git",
+  "license": "Apache2",
+  "source-directories": [
+    "src",
+    "test"
+  ],
+  "exposed-modules": [
+    "Node.Path",
+    "Node.Util"
+  ],
+  "native-modules": true,
+  "dependencies": {
+    "elm-lang/core": "5.0.0 <= v < 6.0.0",
+    "pauldijou/elm-ordeal": "1.0.0 <= v < 2.0.0"
+  },
+  "dependency-sources": {
+    "pauldijou/elm-ordeal": {
+      "url": "git@github.com:pauldijou/elm-ordeal.git",
+      "ref": "2a0009d6a926fc2e80df1febd32ef554aad5aa00"
+    }
+  },
+  "elm-version": "0.18.0 <= v < 0.19.0"
+}
