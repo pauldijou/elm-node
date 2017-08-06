@@ -8,6 +8,6 @@ var _pauldijou$elm_node$Native_Node_Util = function () {
 
   return {
     inspect: F2(util.inspect),
-    inspectLog: inspectLog
+    inspectLog: F2(inspectLog)
   }
 }()

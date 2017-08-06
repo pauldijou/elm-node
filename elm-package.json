@@ -8,18 +8,25 @@
     "test"
   ],
   "exposed-modules": [
+    "Node.ExitCodes",
     "Node.Path",
+    "Node.Process",
     "Node.Util"
   ],
   "native-modules": true,
   "dependencies": {
     "elm-lang/core": "5.0.0 <= v < 6.0.0",
-    "pauldijou/elm-ordeal": "1.0.0 <= v < 2.0.0"
+    "pauldijou/elm-ordeal": "1.0.0 <= v < 2.0.0",
+    "pauldijou/elm-kernel-helpers": "1.0.0 <= v < 2.0.0"
   },
   "dependency-sources": {
     "pauldijou/elm-ordeal": {
       "url": "git@github.com:pauldijou/elm-ordeal.git",
-      "ref": "2a0009d6a926fc2e80df1febd32ef554aad5aa00"
+      "ref": "cf60f2deba3796ff71b2742184fbfa2b9ff5aec8"
+    },
+    "pauldijou/elm-kernel-helpers": {
+      "url": "git@github.com:pauldijou/elm-kernel-helpers.git",
+      "ref": "3021215c9caf9fd102a99af4f257e2650c080782"
     }
   },
   "elm-version": "0.18.0 <= v < 0.19.0"
