@@ -4,7 +4,8 @@ Elm package exposing some of Node APIs.
 
 ## Supported APIs
 
----------|------------|---------
+Name | Elm | Node
+-----|-----|-----
 Exit Codes | [Elm module](https://github.com/pauldijou/elm-node/blob/master/src/Node/ExitCodes.elm) | [Node API](https://nodejs.org/docs/latest/api/process.html#process_exit_codes)
 Path | [Elm module](https://github.com/pauldijou/elm-node/blob/master/src/Node/Path.elm) | [Node API](https://nodejs.org/docs/latest/api/path.html)
 Process | [Elm module](https://github.com/pauldijou/elm-node/blob/master/src/Node/Process.elm) | [Node API](https://nodejs.org/docs/latest/api/process.html)
