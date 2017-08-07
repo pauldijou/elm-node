@@ -22,7 +22,7 @@
   "dependency-sources": {
     "pauldijou/elm-ordeal": {
       "url": "git@github.com:pauldijou/elm-ordeal.git",
-      "ref": "cf60f2deba3796ff71b2742184fbfa2b9ff5aec8"
+      "ref": "9c92c5ec313186a3f7c6d100696aac77f2688ebc"
     },
     "pauldijou/elm-kernel-helpers": {
       "url": "git@github.com:pauldijou/elm-kernel-helpers.git",

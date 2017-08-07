@@ -31,10 +31,10 @@ all =
   describe "Util"
     [ test "inspect" (
       success
-      |> andThen (basicInspect 1 |> shouldEqual "1" )
-      |> andThen (basicInspect True |> shouldEqual "true" )
-      |> andThen (basicInspect False |> shouldEqual "false" )
-      |> andThen (basicInspect { a = 1 } |> shouldEqual "{ a: 1 }" )
+      |> and (basicInspect 1 |> shouldEqual "1" )
+      |> and (basicInspect True |> shouldEqual "true" )
+      |> and (basicInspect False |> shouldEqual "false" )
+      |> and (basicInspect { a = 1 } |> shouldEqual "{ a: 1 }" )
     )
     , test "recursive structure" (
       basicInspect Native.Node.Test.Helpers.recursiveValue
@@ -42,23 +42,23 @@ all =
     )
     , test "depth" (
       success
-      |> andThen(
+      |> and(
         Util.inspect (Just depth0) Native.Node.Test.Helpers.deepValue
         |> shouldEqual "{ next: [Object] }"
       )
-      |> andThen(
+      |> and(
         Util.inspect (Just depth1) Native.Node.Test.Helpers.deepValue
         |> shouldEqual "{ next: { next: [Object] } }"
       )
-      |> andThen(
+      |> and(
         Util.inspect (Just depth2) Native.Node.Test.Helpers.deepValue
         |> shouldEqual "{ next: { next: { next: [Object] } } }"
       )
-      |> andThen(
+      |> and(
         Util.inspect (Just depth3) Native.Node.Test.Helpers.deepValue
         |> shouldEqual "{ next: { next: { next: { done: true } } } }"
       )
-      |> andThen(
+      |> and(
         Util.inspect (Just depthInfinite) Native.Node.Test.Helpers.deepValue
         |> shouldEqual "{ next: { next: { next: { done: true } } } }"
       )

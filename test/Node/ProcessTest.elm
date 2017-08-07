@@ -50,7 +50,7 @@ all =
       Process.chdir parentDir
       |> Task.andThen (\_ -> Process.cwd |> wrapNever)
       |> shouldSucceedWith parentDir
-      |> andThen (
+      |> and (
         Process.chdir currentDir
         |> Task.andThen (\_ -> Process.cwd |> wrapNever)
         |> shouldSucceedWith currentDir
@@ -91,10 +91,10 @@ all =
     )
     , test "env" (
       success
-      |> andThen (Process.env |> Dict.get "USER" |> shouldBeJust)
-      |> andThen (Process.env |> Dict.get "LANGUAGE" |> shouldBeJust)
-      |> andThen (Process.env |> Dict.get "npm_package_scripts_test" |> shouldBeJust)
-      |> andThen (Process.env |> Dict.get "npm_lifecycle_event" |> shouldEqual (Just "test"))
+      |> and (Process.env |> Dict.get "USER" |> shouldBeJust)
+      |> and (Process.env |> Dict.get "LANGUAGE" |> shouldBeJust)
+      |> and (Process.env |> Dict.get "npm_package_scripts_test" |> shouldBeJust)
+      |> and (Process.env |> Dict.get "npm_lifecycle_event" |> shouldEqual (Just "test"))
     )
     , test "execArgv" (
       Process.execArgv |> shouldEqual []
@@ -105,7 +105,7 @@ all =
     , test "hrtime" (
       Process.hrtime
       |> andTest (\time ->
-        if time.seconds > 30000 && time.nanoseconds > 0
+        if time.seconds > 1000 && time.nanoseconds > 0
         then success
         else failure <| "Wrong time: " ++ (toString time)
       )
@@ -148,9 +148,9 @@ all =
         release = Process.release
       in
         success
-        |> andThen (release.name |> shouldEqual "node")
-        |> andThen (release.sourceUrl |> shouldPass (\v -> String.length v > 0))
-        |> andThen (release.headersUrl |> shouldPass (\v -> String.length v > 0))
+        |> and (release.name |> shouldEqual "node")
+        |> and (release.sourceUrl |> shouldPass (\v -> String.length v > 0))
+        |> and (release.headersUrl |> shouldPass (\v -> String.length v > 0))
 
     )
     , test "title" (
@@ -162,7 +162,7 @@ all =
       Process.withTitle "elm-node"
       |> wrapNever
       |> shouldSucceed
-      |> andThen (
+      |> and (
         Process.title
         |> wrapNever
         |> andTest (shouldEqual "elm-node")
@@ -178,6 +178,6 @@ all =
     )
     , test "versions" (
       Process.versions |> shouldNotEqual Dict.empty
-      |> andThen (Process.versions |> Dict.get "modules" |> shouldBeJust)
+      |> and (Process.versions |> Dict.get "modules" |> shouldBeJust)
     )
     ]

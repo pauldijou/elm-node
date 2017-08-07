@@ -25,15 +25,15 @@ all =
     )
     , test "extname" (
       success
-      |> andThen (Path.extname "index.html" |> shouldEqual ".html")
-      |> andThen (Path.extname "index.coffee.md" |> shouldEqual ".md")
-      |> andThen (Path.extname "index." |> shouldEqual ".")
-      |> andThen (Path.extname "index" |> shouldEqual "")
-      |> andThen (Path.extname ".index" |> shouldEqual "")
+      |> and (Path.extname "index.html" |> shouldEqual ".html")
+      |> and (Path.extname "index.coffee.md" |> shouldEqual ".md")
+      |> and (Path.extname "index." |> shouldEqual ".")
+      |> and (Path.extname "index" |> shouldEqual "")
+      |> and (Path.extname ".index" |> shouldEqual "")
     )
     , test "format" (
       success
-      |> andThen (
+      |> and (
         Path.format
           { defaultFormatted
           | root = Just "/ignored"
@@ -42,7 +42,7 @@ all =
           }
         |> shouldEqual "/home/user/dir/file.txt"
       )
-      |> andThen (
+      |> and (
         Path.format
           { defaultFormatted
           | root = Just "/"
@@ -51,7 +51,7 @@ all =
           }
         |> shouldEqual "/file.txt"
       )
-      |> andThen (
+      |> and (
         Path.format
           { defaultFormatted
           | root = Just "/"
@@ -63,18 +63,18 @@ all =
     )
     , test "isAbsolute" (
       success
-      |> andThen (Path.isAbsolute "/foo/bar" |> shouldEqual True)
-      |> andThen (Path.isAbsolute "/baz/.." |> shouldEqual True)
-      |> andThen (Path.isAbsolute "qux/" |> shouldEqual False)
-      |> andThen (Path.isAbsolute "." |> shouldEqual False)
+      |> and (Path.isAbsolute "/foo/bar" |> shouldEqual True)
+      |> and (Path.isAbsolute "/baz/.." |> shouldEqual True)
+      |> and (Path.isAbsolute "qux/" |> shouldEqual False)
+      |> and (Path.isAbsolute "." |> shouldEqual False)
     )
     , test "join" (
       success
-      |> andThen (Path.join ["/foo", "bar", "baz/asdf", "quux", ".."] |> shouldEqual "/foo/bar/baz/asdf")
-      |> andThen (Path.join2 "/foo" "bar" |> shouldEqual "/foo/bar")
-      |> andThen (Path.join3 "/foo" "bar" "baz/asdf" |> shouldEqual "/foo/bar/baz/asdf")
-      |> andThen (Path.join4 "/foo" "bar" "baz/asdf" "quux" |> shouldEqual "/foo/bar/baz/asdf/quux")
-      |> andThen (Path.join5 "/foo" "bar" "baz/asdf" "quux" ".." |> shouldEqual "/foo/bar/baz/asdf")
+      |> and (Path.join ["/foo", "bar", "baz/asdf", "quux", ".."] |> shouldEqual "/foo/bar/baz/asdf")
+      |> and (Path.join2 "/foo" "bar" |> shouldEqual "/foo/bar")
+      |> and (Path.join3 "/foo" "bar" "baz/asdf" |> shouldEqual "/foo/bar/baz/asdf")
+      |> and (Path.join4 "/foo" "bar" "baz/asdf" "quux" |> shouldEqual "/foo/bar/baz/asdf/quux")
+      |> and (Path.join5 "/foo" "bar" "baz/asdf" "quux" ".." |> shouldEqual "/foo/bar/baz/asdf")
     )
     , test "normalize" (
       Path.normalize "/foo/bar//baz/asdf/quux/.." |> shouldEqual "/foo/bar/baz/asdf"
@@ -94,14 +94,14 @@ all =
     )
     , test "resolve" (
       success
-      |> andThen (Path.resolve ["/foo/bar", "./baz"] |> shouldEqual "/foo/bar/baz")
-      |> andThen (Path.resolve ["/foo/bar", "/tmp/file/"] |> shouldEqual "/tmp/file")
-      |> andThen (Path.resolve1 "/foo" |> shouldEqual "/foo")
-      |> andThen (Path.resolve2 "/foo" "bar" |> shouldEqual "/foo/bar")
-      |> andThen (Path.resolve3 "/foo" "bar" "baz/asdf" |> shouldEqual "/foo/bar/baz/asdf")
-      |> andThen (Path.resolve4 "/foo" "bar" "baz/asdf" "quux" |> shouldEqual "/foo/bar/baz/asdf/quux")
-      |> andThen (Path.resolve5 "/foo" "bar" "baz/asdf" "quux" ".." |> shouldEqual "/foo/bar/baz/asdf")
-      |> andThen (
+      |> and (Path.resolve ["/foo/bar", "./baz"] |> shouldEqual "/foo/bar/baz")
+      |> and (Path.resolve ["/foo/bar", "/tmp/file/"] |> shouldEqual "/tmp/file")
+      |> and (Path.resolve1 "/foo" |> shouldEqual "/foo")
+      |> and (Path.resolve2 "/foo" "bar" |> shouldEqual "/foo/bar")
+      |> and (Path.resolve3 "/foo" "bar" "baz/asdf" |> shouldEqual "/foo/bar/baz/asdf")
+      |> and (Path.resolve4 "/foo" "bar" "baz/asdf" "quux" |> shouldEqual "/foo/bar/baz/asdf/quux")
+      |> and (Path.resolve5 "/foo" "bar" "baz/asdf" "quux" ".." |> shouldEqual "/foo/bar/baz/asdf")
+      |> and (
         Process.cwd
         |> Task.mapError (\_ -> "Never")
         |> andTest (shouldEqual <| Path.resolve1 ".")
