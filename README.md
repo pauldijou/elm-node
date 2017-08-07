@@ -4,10 +4,11 @@ Elm package exposing some of Node APIs.
 
 ## Supported APIs
 
-- [Exit Codes](https://nodejs.org/docs/latest/api/process.html#process_exit_codes)
-- [Path](https://nodejs.org/docs/latest/api/path.html)
-- [Process](https://nodejs.org/docs/latest/api/process.html)
-- [Util](https://nodejs.org/docs/latest/api/util.html)
+---------|------------|---------
+Exit Codes | [Elm module](https://github.com/pauldijou/elm-node/blob/master/src/Node/ExitCodes.elm) | [Node API](https://nodejs.org/docs/latest/api/process.html#process_exit_codes)
+Path | [Elm module](https://github.com/pauldijou/elm-node/blob/master/src/Node/Path.elm) | [Node API](https://nodejs.org/docs/latest/api/path.html)
+Process | [Elm module](https://github.com/pauldijou/elm-node/blob/master/src/Node/Process.elm) | [Node API](https://nodejs.org/docs/latest/api/process.html)
+Util | [Elm module](https://github.com/pauldijou/elm-node/blob/master/src/Node/Util.elm) | [Node API](https://nodejs.org/docs/latest/api/util.html)
 
 ## Tests
 
@@ -19,7 +20,7 @@ If you need to run the tests, just use `yarn install && yarn deps && yarn test` 
 
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2015 Paul Dijou ([http://pauldijou.fr](http://pauldijou.fr)).
+Copyright Paul Dijou ([http://pauldijou.fr](http://pauldijou.fr)).
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this project except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
