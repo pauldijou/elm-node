@@ -1,7 +1,7 @@
 {
   "scripts": {
     "deps": "elm-github-install",
-    "test": "elm-ordeal test/NodeTest.elm --timeout=100 --node"
+    "test": "elm-ordeal test/NodeTest.elm --timeout=100 --node --keep"
   },
   "devDependencies": {
     "elm": "0.18.0",

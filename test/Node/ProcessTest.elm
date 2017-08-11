@@ -1,4 +1,4 @@
-module Node.ProcessTest exposing (all)
+module Node.ProcessTest exposing (tests)
 
 import Dict exposing (Dict)
 import Task exposing (Task)
@@ -23,8 +23,8 @@ parentDir = Path.resolve [ ".." ]
 wrapNever: Task Never a -> Task String a
 wrapNever = Task.mapError (\_ -> "Never")
 
-all: Test
-all =
+tests: Test
+tests =
   describe "Process"
     [ test "arch" (
       Process.arch |> shouldBeOneOf [ "arm", "ia32", "x64" ]

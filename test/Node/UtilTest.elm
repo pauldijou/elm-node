@@ -1,4 +1,4 @@
-module Node.UtilTest exposing (all)
+module Node.UtilTest exposing (tests)
 
 import Ordeal exposing (..)
 
@@ -26,8 +26,8 @@ depth3 = { defaultOptions | depth = Just <| Util.Depth 3 }
 depthInfinite: Util.Options
 depthInfinite = { defaultOptions | depth = Just <| Util.Infinite }
 
-all: Test
-all =
+tests: Test
+tests =
   describe "Util"
     [ test "inspect" (
       success

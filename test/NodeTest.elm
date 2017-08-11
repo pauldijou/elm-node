@@ -2,6 +2,7 @@ port module NodeTest exposing (..)
 
 import Ordeal exposing (..)
 
+import Node.FileSystemTest
 import Node.PathTest
 import Node.ProcessTest
 import Node.UtilTest
@@ -14,7 +15,8 @@ port emit : Event -> Cmd msg
 all: Test
 all =
   describe "Node"
-    [ Node.PathTest.all
-    , Node.ProcessTest.all
-    , Node.UtilTest.all
+    [ Node.FileSystemTest.tests
+    , Node.PathTest.tests
+    , Node.ProcessTest.tests
+    , Node.UtilTest.tests
     ]

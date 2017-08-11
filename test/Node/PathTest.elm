@@ -1,4 +1,4 @@
-module Node.PathTest exposing (all)
+module Node.PathTest exposing (tests)
 
 import Task
 
@@ -10,8 +10,8 @@ import Node.Process as Process
 defaultFormatted: Path.Formatted
 defaultFormatted = Path.defaultFormatted
 
-all: Test
-all =
+tests: Test
+tests =
   describe "Path"
     [ test "basename" (
       Path.basename "/foo/bar/baz/asdf/quux.html" |> shouldEqual "quux.html"
