@@ -244,4 +244,4 @@ decoderRelease =
     (Decode.maybe <| Decode.field "lts" Decode.string)
 
 noWarnings: String
-noWarnings = Kernel.Helpers.removeWarnings
+noWarnings = Kernel.Helpers.noWarnings

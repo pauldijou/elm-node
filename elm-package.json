@@ -24,16 +24,16 @@
   },
   "dependency-sources": {
     "pauldijou/elm-ordeal": {
-      "url": "git@github.com:pauldijou/elm-ordeal.git",
+      "url": "https://github.com/pauldijou/elm-ordeal.git",
       "ref": "18ea467ff981ced5d0be04ae144ea3a305a11dcf"
     },
     "pauldijou/elm-kernel-helpers": {
-      "url": "git@github.com:pauldijou/elm-kernel-helpers.git",
-      "ref": "3021215c9caf9fd102a99af4f257e2650c080782"
+      "url": "https://github.com/pauldijou/elm-kernel-helpers.git",
+      "ref": "6ea75aedfb77da2b995d54537a17649072957426"
     },
     "pauldijou/elm-error": {
-      "url": "git@github.com:pauldijou/elm-error.git",
-      "ref": "9802acf1b2a7af6ea192cb4bf4db2f26553e3993"
+      "url": "https://github.com/pauldijou/elm-error.git",
+      "ref": "b72dc87c52ed27063f0910bac66f82d551e04ed5"
     }
   },
   "elm-version": "0.18.0 <= v < 0.19.0"
