@@ -1,5 +1,6 @@
 module Node.Console exposing
-  ( clear
+  ( defaultOptions
+  , clear
   , defaultLabel
   , count
   , countReset
@@ -17,12 +18,28 @@ module Node.Console exposing
 {-|
 Node API: https://nodejs.org/api/console.html
 
-@docs clear, defaultLabel, count, countReset, dir, dir2, error, info, log, time, timeEnd, trace, warn
+@docs defaultOptions, clear, defaultLabel, count, countReset, dir, dir2, error, info, log, time, timeEnd, trace, warn
 -}
 
 import Json.Encode as Encode
+import Node.Types as Types
 import Node.Util as Util
+import Node.Internals as Internals
 import Native.Node.Console
+
+type alias Options =
+  { showHidden: Bool
+  , depth: Types.Depth
+  , colors: Bool
+  }
+
+{-| -}
+defaultOptions: Options
+defaultOptions =
+  { showHidden = False
+  , depth = Types.Depth 2
+  , colors = False
+  }
 
 {-| -}
 clear: a -> a
@@ -49,9 +66,9 @@ dir =
   Native.Node.Console.dir
 
 {-| -}
-dir2: { showHidden: Bool, depth: Maybe Int, colors: Bool } -> a -> a
+dir2: Options -> a -> a
 dir2 options value =
-  Native.Node.Console.dir2 (encodeDir2 options) value
+  Native.Node.Console.dir2 (encodeOptions options) value
 
 {-| -}
 error: a -> a
@@ -92,10 +109,10 @@ warn =
 -- -----------------------------------------------------------------------------
 -- JSON
 
-encodeDir2: { showHidden: Bool, depth: Util.Depth, colors: Bool } -> Encode.Value
-encodeDir2 options =
+encodeOptions: Options -> Encode.Value
+encodeOptions options =
   Encode.object
     [ ("showHidden", Encode.bool options.showHidden)
-    , ("depth", Util.encodeDepth options.depth)
+    , ("depth", Internals.encodeDepth options.depth)
     , ("colors", Encode.bool options.colors)
     ]

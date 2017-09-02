@@ -10,12 +10,12 @@
   "exposed-modules": [
     "Node.Buffer",
     "Node.Console",
-    "Node.Encoding",
     "Node.ExitCodes",
     "Node.FileSystem",
     "Node.Path",
     "Node.Process",
     "Node.Stats",
+    "Node.Types",
     "Node.Util"
   ],
   "native-modules": true,
@@ -28,7 +28,7 @@
   "dependency-sources": {
     "pauldijou/elm-ordeal": {
       "url": "https://github.com/pauldijou/elm-ordeal.git",
-      "ref": "18ea467ff981ced5d0be04ae144ea3a305a11dcf"
+      "ref": "3ff8395abaf6a5f124050472ad07809373e7a73f"
     },
     "pauldijou/elm-kernel-helpers": {
       "url": "https://github.com/pauldijou/elm-kernel-helpers.git",

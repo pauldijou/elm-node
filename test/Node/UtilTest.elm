@@ -2,6 +2,7 @@ module Node.UtilTest exposing (tests)
 
 import Ordeal exposing (..)
 
+import Node.Types exposing (Depth(..))
 import Node.Util as Util
 import Native.Node.Test.Helpers
 
@@ -12,19 +13,19 @@ basicInspect: a -> String
 basicInspect = Util.inspect Nothing
 
 depth0: Util.Options
-depth0 = { defaultOptions | depth = Just <| Util.Depth 0 }
+depth0 = { defaultOptions | depth = Just <| Depth 0 }
 
 depth1: Util.Options
-depth1 = { defaultOptions | depth = Just <| Util.Depth 1 }
+depth1 = { defaultOptions | depth = Just <| Depth 1 }
 
 depth2: Util.Options
-depth2 = { defaultOptions | depth = Just <| Util.Depth 2 }
+depth2 = { defaultOptions | depth = Just <| Depth 2 }
 
 depth3: Util.Options
-depth3 = { defaultOptions | depth = Just <| Util.Depth 3 }
+depth3 = { defaultOptions | depth = Just <| Depth 3 }
 
 depthInfinite: Util.Options
-depthInfinite = { defaultOptions | depth = Just <| Util.Infinite }
+depthInfinite = { defaultOptions | depth = Just <| Infinite }
 
 tests: Test
 tests =

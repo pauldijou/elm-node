@@ -63,7 +63,7 @@ Node API: https://nodejs.org/api/buffer.html
 import Task exposing (Task)
 import Json.Encode as Encode
 
-import Node.Encoding exposing (Encoding, defaultEncoding)
+import Node.Types exposing (Encoding, defaultEncoding)
 import Node.Internals exposing (encodeEncoding)
 import Native.Node.Buffer
 

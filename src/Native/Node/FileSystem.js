@@ -13,7 +13,7 @@ const _pauldijou$elm_node$Native_Node_FileSystem = function () {
     return function taskified() {
       return helpers.task.fromCallback((succeed, fail) => {
         function callback(error, value1, value2) {
-          if (error !== undefined) {
+          if (error) {
             fail(parseError(error))
           } else if (value2 !== undefined) {
             succeed(helpers.tuple.pair(normalize(value1), normalize(value2)))

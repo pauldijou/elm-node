@@ -70,9 +70,6 @@ var _pauldijou$elm_node$Native_Node_Buffer = function () {
 
   function transcode(fromEnc, toEnc, buf) { return buffer.transcode(buf, fromEnc, toEnc) }
 
-  console.log(require('util').inspect(buffer, { depth: null }));
-  console.log(require('util').inspect(Buffer, { depth: null }));
-
   const constants = buffer.constants || {
     'MAX_LENGTH': buffer.kMaxLength,
     'MAX_STRING_LENGTH': 0

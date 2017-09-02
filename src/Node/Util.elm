@@ -1,6 +1,5 @@
 module Node.Util exposing
-  ( Depth(Depth, Infinite)
-  , Options
+  ( Options
   , defaultOptions
   , inspect
   , inspectLog
@@ -11,16 +10,14 @@ Node API: https://nodejs.org/docs/latest/api/util.html
 
 The util module is primarily designed to support the needs of Node.js' own internal APIs. However, many of the utilities are useful for application and module developers as well.
 
-@docs Depth, Options, defaultOptions, inspect, inspectLog
+@docs Options, defaultOptions, inspect, inspectLog
 -}
 
 import Json.Encode as Encode
 
-import Node.Helpers as H
+import Node.Types exposing (Depth)
+import Node.Internals as Internals exposing (encodeMaybeField, encodeDepth)
 import Native.Node.Util
-
-{-| Specifies the number of times to recurse while formatting the object. This is useful for inspecting large complicated objects. -}
-type Depth = Depth Int | Infinite
 
 
 {-| Check https://nodejs.org/docs/latest/api/util.html#util_util_inspect_object_options -}
@@ -60,21 +57,15 @@ inspectLog options value =
 -- -----------------------------------------------------------------------------
 -- JSON
 
-encodeDepth: Depth -> Encode.Value
-encodeDepth depth =
-  case depth of
-    Depth int -> Encode.int int
-    Infinite  -> Encode.null
-
 encodeOptions: Options -> Encode.Value
 encodeOptions options =
-  [ H.encodeMaybeField "showHidden" Encode.bool options.showHidden
-  , H.encodeMaybeField "depth" encodeDepth options.depth
-  , H.encodeMaybeField "colors" Encode.bool options.colors
-  , H.encodeMaybeField "customInspect" Encode.bool options.customInspect
-  , H.encodeMaybeField "showProxy" Encode.bool options.showProxy
-  , H.encodeMaybeField "maxArrayLength" Encode.int options.maxArrayLength
-  , H.encodeMaybeField "breakLength" Encode.int options.breakLength
+  [ encodeMaybeField "showHidden" Encode.bool options.showHidden
+  , encodeMaybeField "depth" encodeDepth options.depth
+  , encodeMaybeField "colors" Encode.bool options.colors
+  , encodeMaybeField "customInspect" Encode.bool options.customInspect
+  , encodeMaybeField "showProxy" Encode.bool options.showProxy
+  , encodeMaybeField "maxArrayLength" Encode.int options.maxArrayLength
+  , encodeMaybeField "breakLength" Encode.int options.breakLength
   ]
   |> List.filterMap identity
   |> Encode.object

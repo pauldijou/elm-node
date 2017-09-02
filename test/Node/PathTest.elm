@@ -104,7 +104,7 @@ tests =
       |> and (
         Process.cwd
         |> Task.mapError (\_ -> "Never")
-        |> andTest (shouldEqual <| Path.resolve1 ".")
+        |> shouldSucceedAnd (shouldEqual <| Path.resolve1 ".")
       )
     )
     ]

@@ -1,13 +1,77 @@
 module Node.FileSystem exposing
-  ( access
+  ( constants
+  , access
   , accessSync
-  , constants
+  , appendFile
+  , appendFileBuffer
+  , appendFileDescriptor
+  , appendFileSync
+  , appendFileSyncBuffer
+  , appendFileSyncDescriptor
+  , chmod
+  , chmodSync
+  , chown
+  , chownSync
+  , close
+  , closeSync
+  , fchmod
+  , fchmodSync
+  , fchown
+  , fchownSync
+  , fdatasync
+  , fdatasyncSync
+  , fstat
+  , fstatSync
+  , fsync
+  , fsyncSync
+  , ftruncate
+  , ftruncateSync
+  , futimes
+  , futimesSync
+  , lchown
+  , lchownBuffer
+  , lchownSync
+  , lchownSyncBuffer
+  , link
+  , linkSync
+  , lstat
+  , lstatSync
+  , mkdir
+  , mkdirSync
+  , mkdtemp
+  , mkdtempSync
+  , open
+  , openSync
+  , read
+  , readSync
+  , readdir
+  , readdirSync
+  , readFile
+  , readFileSync
+  , readlink
+  , readlinkSync
+  , realpath
+  , realpathSync
+  , rename
+  , renameSync
+  , rmdir
+  , rmdirSync
+  , stat
+  , statSync
+  , symlink
+  , symlinkSync
+  , truncate
+  , truncateSync
+  , unlink
+  , unlinkSync
+  , utimes
+  , utimesSync
   )
 
 {-|
 Node API: https://nodejs.org/api/fs.html
 
-@docs access, accessSync, constants
+@docs constants, access, accessSync, appendFile, appendFileBuffer, appendFileDescriptor, appendFileSync, appendFileSyncBuffer, appendFileSyncDescriptor, chmod, chmodSync, chown, chownSync, close, closeSync, fchmod, fchmodSync, fchown, fchownSync, fdatasync, fdatasyncSync, fstat, fstatSync, fsync, fsyncSync, ftruncate, ftruncateSync, futimes, futimesSync, lchown, lchownBuffer, lchownSync, lchownSyncBuffer, link, linkSync, lstat, lstatSync, mkdir, mkdirSync, mkdtemp, mkdtempSync, open, openSync, read, readSync, readdir, readdirSync, readFile, readFileSync, readlink, readlinkSync, realpath, realpathSync, rename, renameSync, rmdir, rmdirSync, stat, statSync, symlink, symlinkSync, truncate, truncateSync, unlink, unlinkSync, utimes, utimesSync
 -}
 
 import Task exposing (Task)
@@ -16,7 +80,7 @@ import Error exposing (Error)
 
 import Node.Buffer exposing (Buffer)
 import Node.Stats exposing (Stats)
-import Node.Encoding exposing (Encoding)
+import Node.Types exposing (Encoding)
 import Node.Internals exposing (encodeEncoding)
 import Native.Node.FileSystem
 

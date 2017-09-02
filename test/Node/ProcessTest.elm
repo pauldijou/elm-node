@@ -67,7 +67,7 @@ tests =
     )
     , test "cpuUsage" (
       Process.cpuUsage
-      |> andTest (\usage ->
+      |> shouldSucceedAnd (\usage ->
         if (usage.user > 0 && usage.system > 0)
         then success
         else failure "CPU usages should be positive"
@@ -80,7 +80,7 @@ tests =
         |> Task.map (\_ -> usage)
       )
       |> Task.andThen Process.cpuUsageSince
-      |> andTest (\usage ->
+      |> shouldSucceedAnd (\usage ->
         if ((usage.user == 0 || usage.user == 4000)  && usage.system == 0)
         then success
         else failure <| "CPU usages should be zero but is:" ++ (toString usage)
@@ -104,7 +104,7 @@ tests =
     )
     , test "hrtime" (
       Process.hrtime
-      |> andTest (\time ->
+      |> shouldSucceedAnd (\time ->
         if time.seconds > 1000 && time.nanoseconds > 0
         then success
         else failure <| "Wrong time: " ++ (toString time)
@@ -118,7 +118,7 @@ tests =
       )
       |> Task.andThen Process.hrtimeSince
       |> wrapNever
-      |> andTest (\time ->
+      |> shouldSucceedAnd (\time ->
         if (time.seconds == 0  && time.nanoseconds > 1000000)
         then success
         else failure <| "Should be a really small time:" ++ (toString time)
@@ -127,7 +127,7 @@ tests =
     , test "memoryUsage" (
       Process.memoryUsage
       |> wrapNever
-      |> andTest (\usage ->
+      |> shouldSucceedAnd (\usage ->
         if (  usage.rss       > 10000000
            && usage.heapTotal > 10000000
            && usage.heapUsed  > 10000000
@@ -156,7 +156,7 @@ tests =
     , test "title" (
       Process.title
       |> wrapNever
-      |> andTest (shouldEqual "elm-ordeal")
+      |> shouldSucceedAnd (shouldEqual "elm-ordeal")
     )
     , test "withTitle" (
       Process.withTitle "elm-node"
@@ -165,13 +165,13 @@ tests =
       |> and (
         Process.title
         |> wrapNever
-        |> andTest (shouldEqual "elm-node")
+        |> shouldSucceedAnd (shouldEqual "elm-node")
       )
     )
     , test "uptime" (
       Process.uptime
       |> wrapNever
-      |> andTest (shouldBeGreaterThan 0)
+      |> shouldSucceedAnd (shouldBeGreaterThan 0)
     )
     , test "version" (
       Process.version |> shouldPass (\v -> String.length v > 0)
