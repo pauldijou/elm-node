@@ -3,14 +3,22 @@ const _pauldijou$elm_node$Native_Node_FileSystem = function () {
   const helpers = _pauldijou$elm_kernel_helpers$Native_Kernel_Helpers
   const parseError = _pauldijou$elm_error$Error$parse
 
+  function normalize(value) {
+    if (value === undefined || value === null) { return helpers.tuple.empty }
+    if (Array.isArray(value)) { return helpers.list.fromArray(value) }
+    return value
+  }
+
   function taskify(fn) {
     return function taskified() {
       return helpers.task.fromCallback((succeed, fail) => {
-        function callback(error, value) {
+        function callback(error, value1, value2) {
           if (error !== undefined) {
             fail(parseError(error))
+          } else if (value2 !== undefined) {
+            succeed(helpers.tuple.pair(normalize(value1), normalize(value2)))
           } else {
-            succeed(value === undefined ? helpers.tuple.empty : value)
+            succeed(normalize(value1))
           }
         }
 
@@ -26,7 +34,7 @@ const _pauldijou$elm_node$Native_Node_FileSystem = function () {
   function resultify(fn) {
     return function resultified() {
       try {
-        return helpers.result.ok(fn(...arguments))
+        return helpers.result.ok(normalize(fn(...arguments)))
       } catch (error) {
         return helpers.result.err(parseError(error))
       }
@@ -34,6 +42,7 @@ const _pauldijou$elm_node$Native_Node_FileSystem = function () {
   }
 
   return {
+    identity: function (a) { return a },
     access: F2(taskify(fs.access)),
     accessSync: F2(resultify(fs.accessSync)),
     appendFile: F3(taskify(fs.appendFile)),
@@ -60,8 +69,9 @@ const _pauldijou$elm_node$Native_Node_FileSystem = function () {
     ftruncateSync: F2(resultify(fs.ftruncateSync)),
     futimes: F3(taskify(fs.futimes)),
     futimesSync: F3(resultify(fs.futimesSync)),
-    lchmod: F2(taskify(fs.lchmod)),
-    lchmodSync: F2(resultify(fs.lchmodSync)),
+    // Only available on macOS.
+    // lchmod: F2(taskify(fs.lchmod)),
+    // lchmodSync: F2(resultify(fs.lchmodSync)),
     lchown: F3(taskify(fs.lchown)),
     lchownSync: F3(resultify(fs.lchownSync)),
     link: F2(taskify(fs.link)),
@@ -107,43 +117,43 @@ const _pauldijou$elm_node$Native_Node_FileSystem = function () {
     writeStringSync: F3(resultify(fs.writeFileSync)),
     writeFile: F3(taskify(fs.writeFile)),
     writeFileSync: F3(resultify(fs.writeFileSync)),
-    'F_OK': fs.F_OK,
-    'R_OK': fs.R_OK,
-    'W_OK': fs.W_OK,
-    'X_OK': fs.X_OK,
-    'O_RDONLY': fs.O_RDONLY,
-    'O_WRONLY': fs.O_WRONLY,
-    'O_RDWR': fs.O_RDWR,
-    'O_CREAT': fs.O_CREAT,
-    'O_EXCL': fs.O_EXCL,
-    'O_NOCTTY': fs.O_NOCTTY,
-    'O_TRUNC': fs.O_TRUNC,
-    'O_APPEND': fs.O_APPEND,
-    'O_DIRECTORY': fs.O_DIRECTORY,
-    'O_NOATIME': fs.O_NOATIME,
-    'O_NOFOLLOW': fs.O_NOFOLLOW,
-    'O_SYNC': fs.O_SYNC,
-    'O_SYMLINK': fs.O_SYMLINK,
-    'O_DIRECT': fs.O_DIRECT,
-    'O_NONBLOCK': fs.O_NONBLOCK,
-    'S_IFMT': fs.S_IFMT,
-    'S_IFREG': fs.S_IFREG,
-    'S_IFCHR': fs.S_IFCHR,
-    'S_IFBLK': fs.S_IFBLK,
-    'S_IFIFO': fs.S_IFIFO,
-    'S_IFLNK': fs.S_IFLNK,
-    'S_IFSOCK': fs.S_IFSOCK,
-    'S_IRWXU': fs.S_IRWXU,
-    'S_IRUSR': fs.S_IRUSR,
-    'S_IWUSR': fs.S_IWUSR,
-    'S_IXUSR': fs.S_IXUSR,
-    'S_IRWXG': fs.S_IRWXG,
-    'S_IRGRP': fs.S_IRGRP,
-    'S_IWGRP': fs.S_IWGRP,
-    'S_IXGRP': fs.S_IXGRP,
-    'S_IRWXO': fs.S_IRWXO,
-    'S_IROTH': fs.S_IROTH,
-    'S_IWOTH': fs.S_IWOTH,
-    'S_IXOTH': fs.S_IXOTH,
+    'F_OK': fs.constants.F_OK,
+    'R_OK': fs.constants.R_OK,
+    'W_OK': fs.constants.W_OK,
+    'X_OK': fs.constants.X_OK,
+    'O_RDONLY': fs.constants.O_RDONLY,
+    'O_WRONLY': fs.constants.O_WRONLY,
+    'O_RDWR': fs.constants.O_RDWR,
+    'O_CREAT': fs.constants.O_CREAT,
+    'O_EXCL': fs.constants.O_EXCL,
+    'O_NOCTTY': fs.constants.O_NOCTTY,
+    'O_TRUNC': fs.constants.O_TRUNC,
+    'O_APPEND': fs.constants.O_APPEND,
+    'O_DIRECTORY': fs.constants.O_DIRECTORY,
+    'O_NOATIME': fs.constants.O_NOATIME,
+    'O_NOFOLLOW': fs.constants.O_NOFOLLOW,
+    'O_SYNC': fs.constants.O_SYNC,
+    'O_SYMLINK': fs.constants.O_SYMLINK,
+    'O_DIRECT': fs.constants.O_DIRECT,
+    'O_NONBLOCK': fs.constants.O_NONBLOCK,
+    'S_IFMT': fs.constants.S_IFMT,
+    'S_IFREG': fs.constants.S_IFREG,
+    'S_IFCHR': fs.constants.S_IFCHR,
+    'S_IFBLK': fs.constants.S_IFBLK,
+    'S_IFIFO': fs.constants.S_IFIFO,
+    'S_IFLNK': fs.constants.S_IFLNK,
+    'S_IFSOCK': fs.constants.S_IFSOCK,
+    'S_IRWXU': fs.constants.S_IRWXU,
+    'S_IRUSR': fs.constants.S_IRUSR,
+    'S_IWUSR': fs.constants.S_IWUSR,
+    'S_IXUSR': fs.constants.S_IXUSR,
+    'S_IRWXG': fs.constants.S_IRWXG,
+    'S_IRGRP': fs.constants.S_IRGRP,
+    'S_IWGRP': fs.constants.S_IWGRP,
+    'S_IXGRP': fs.constants.S_IXGRP,
+    'S_IRWXO': fs.constants.S_IRWXO,
+    'S_IROTH': fs.constants.S_IROTH,
+    'S_IWOTH': fs.constants.S_IWOTH,
+    'S_IXOTH': fs.constants.S_IXOTH,
   }
 }()
