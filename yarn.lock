@@ -458,9 +458,9 @@ elm-github-install@1.1.0:
     tar-fs "1.15.0"
     tmp "^0.0.31"
 
-elm-ordeal@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/elm-ordeal/-/elm-ordeal-0.0.4.tgz#36fccc2f0dfac47561222f47b5438810021e4dfd"
+elm-ordeal@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/elm-ordeal/-/elm-ordeal-0.0.5.tgz#a3bae90793c7981518d7d892351bfdda09986fe9"
   dependencies:
     chalk "2.0.1"
     cross-spawn "5.1.0"
@@ -474,6 +474,7 @@ elm-ordeal@^0.0.4:
     log-symbols "2.0.0"
     minimist "1.2.0"
     node-elm-compiler "4.3.1"
+    os-tmpdir "^1.0.2"
 
 elm@0.18.0:
   version "0.18.0"
@@ -1292,7 +1293,7 @@ os-homedir@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-homedir/-/os-homedir-1.0.2.tgz#ffbc4988336e0e833de0c168c7ef152121aa7fb3"
 
-os-tmpdir@^1.0.0, os-tmpdir@~1.0.1:
+os-tmpdir@^1.0.0, os-tmpdir@^1.0.2, os-tmpdir@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
