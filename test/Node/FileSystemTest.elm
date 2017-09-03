@@ -2,34 +2,34 @@ module Node.FileSystemTest exposing (tests)
 
 import Ordeal exposing (..)
 
-import Node.FileSystem as FS exposing (constants)
+import Node.Constants as Constants exposing (fileAccess)
+import Node.FileSystem as FS
 import Node.Stats as Stats
 import Native.Node.Test.Helpers
+
+
+accessReadWrite: Constants.FileAccess
+accessReadWrite =
+  Constants.allFileAccess [ fileAccess.read, fileAccess.write ]
+
+accessReadWriteExecute: Constants.FileAccess
+accessReadWriteExecute =
+  Constants.allFileAccess [ fileAccess.read, fileAccess.write, fileAccess.execute ]
 
 tests: Test
 tests =
   describe "FileSystem"
     [ test "access" (
       all
-      [ FS.access "./azeqsdwxc" constants.access.visible |> shouldFail
-      , FS.accessSync "./azeqsdwxc" constants.access.visible |> shouldBeErr
-      , FS.access "./package.json" constants.access.visible |> shouldSucceed
-      , FS.accessSync "./package.json" constants.access.visible |> shouldBeOk
+      [ FS.access "./azeqsdwxc" fileAccess.visible |> shouldFail
+      , FS.accessSync "./azeqsdwxc" fileAccess.visible |> shouldBeErr
+      , FS.access "file" fileAccess.visible |> shouldSucceed
+      , FS.accessSync "file" fileAccess.visible |> shouldBeOk
+      , FS.accessSync "file" fileAccess.read |> shouldBeOk
+      , FS.accessSync "file" fileAccess.write |> shouldBeOk
+      , FS.accessSync "file" fileAccess.execute |> shouldBeErr
+      , FS.accessSync "file" accessReadWrite |> shouldBeOk
+      , FS.accessSync "file" accessReadWriteExecute |> shouldBeErr
       ]
-    )
-    , test "stat" (
-      FS.stat "./package.json"
-      |> shouldSucceedAnd (\stats ->
-        all
-        [ Stats.isFile stats |> shouldEqual True
-        , Stats.isDirectory stats |> shouldEqual False
-        , Stats.isBlockDevice stats |> shouldEqual False
-        , Stats.isCharacterDevice stats |> shouldEqual False
-        , Stats.isSymbolicLink stats |> shouldEqual False
-        , Stats.isFIFO stats |> shouldEqual False
-        , Stats.isSocket stats |> shouldEqual False
-        , Stats.size stats |> shouldBeGreaterThan 100
-        ]
-      )
     )
     ]

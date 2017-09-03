@@ -138,6 +138,7 @@ const _pauldijou$elm_node$Native_Node_FileSystem = function () {
     'O_NONBLOCK': fs.constants.O_NONBLOCK,
     'S_IFMT': fs.constants.S_IFMT,
     'S_IFREG': fs.constants.S_IFREG,
+    'S_IFDIR': fs.constants.S_IFDIR,
     'S_IFCHR': fs.constants.S_IFCHR,
     'S_IFBLK': fs.constants.S_IFBLK,
     'S_IFIFO': fs.constants.S_IFIFO,

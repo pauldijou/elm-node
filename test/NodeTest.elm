@@ -6,6 +6,7 @@ import Node.ConsoleTest
 import Node.FileSystemTest
 import Node.PathTest
 import Node.ProcessTest
+import Node.StatsTest
 import Node.UtilTest
 
 main: Ordeal
@@ -20,5 +21,6 @@ all =
     , Node.FileSystemTest.tests
     , Node.PathTest.tests
     , Node.ProcessTest.tests
+    , Node.StatsTest.tests
     , Node.UtilTest.tests
     ]

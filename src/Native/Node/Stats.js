@@ -18,7 +18,12 @@ var _pauldijou$elm_node$Native_Node_Stats = function () {
     }
   }
 
+  function toStringRadix(radix, value) {
+    return value.toString(radix)
+  }
+
   return {
+    toStringRadix: F2(toStringRadix),
     isFile: isSomething('isFile'),
     isDirectory: isSomething('isDirectory'),
     isBlockDevice: isSomething('isBlockDevice'),

@@ -49,10 +49,11 @@ tests =
     )
     , test "dir" (Console.dir value |> shouldEqual value)
     , test "dir2" (Console.dir2 defaultOptions value |> shouldEqual value)
-    , test "dir2" (Console.dir2 options value |> shouldEqual value)
+    , test "dir2 (custom options)" (Console.dir2 options value |> shouldEqual value)
     , test "error" (Console.error "error" |> shouldEqual "error")
     , test "info" (Console.info "info" |> shouldEqual "info")
     , test "log" (Console.log "log" |> shouldEqual "log")
+    , test "warn" (Console.warn "warn" |> shouldEqual "warn")
     , test "time" (
       all
       [ Console.time "time label" 1 |> shouldEqual 1
@@ -60,5 +61,4 @@ tests =
       ]
     )
     , test "trace" (Console.trace "trace" 1 |> shouldEqual 1)
-    , test "warn" (Console.warn "warn" |> shouldEqual "warn")
     ]

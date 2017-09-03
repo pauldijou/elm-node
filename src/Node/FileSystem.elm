@@ -1,6 +1,5 @@
 module Node.FileSystem exposing
-  ( constants
-  , access
+  ( access
   , accessSync
   , appendFile
   , appendFileBuffer
@@ -71,22 +70,19 @@ module Node.FileSystem exposing
 {-|
 Node API: https://nodejs.org/api/fs.html
 
-@docs constants, access, accessSync, appendFile, appendFileBuffer, appendFileDescriptor, appendFileSync, appendFileSyncBuffer, appendFileSyncDescriptor, chmod, chmodSync, chown, chownSync, close, closeSync, fchmod, fchmodSync, fchown, fchownSync, fdatasync, fdatasyncSync, fstat, fstatSync, fsync, fsyncSync, ftruncate, ftruncateSync, futimes, futimesSync, lchown, lchownBuffer, lchownSync, lchownSyncBuffer, link, linkSync, lstat, lstatSync, mkdir, mkdirSync, mkdtemp, mkdtempSync, open, openSync, read, readSync, readdir, readdirSync, readFile, readFileSync, readlink, readlinkSync, realpath, realpathSync, rename, renameSync, rmdir, rmdirSync, stat, statSync, symlink, symlinkSync, truncate, truncateSync, unlink, unlinkSync, utimes, utimesSync
+@docs access, accessSync, appendFile, appendFileBuffer, appendFileDescriptor, appendFileSync, appendFileSyncBuffer, appendFileSyncDescriptor, chmod, chmodSync, chown, chownSync, close, closeSync, fchmod, fchmodSync, fchown, fchownSync, fdatasync, fdatasyncSync, fstat, fstatSync, fsync, fsyncSync, ftruncate, ftruncateSync, futimes, futimesSync, lchown, lchownBuffer, lchownSync, lchownSyncBuffer, link, linkSync, lstat, lstatSync, mkdir, mkdirSync, mkdtemp, mkdtempSync, open, openSync, read, readSync, readdir, readdirSync, readFile, readFileSync, readlink, readlinkSync, realpath, realpathSync, rename, renameSync, rmdir, rmdirSync, stat, statSync, symlink, symlinkSync, truncate, truncateSync, unlink, unlinkSync, utimes, utimesSync
 -}
 
 import Task exposing (Task)
 import Json.Encode as Encode
 import Error exposing (Error)
 
+import Node.Constants exposing (FileAccess, FileOpen)
 import Node.Buffer exposing (Buffer)
 import Node.Stats exposing (Stats)
 import Node.Types exposing (Encoding)
 import Node.Internals exposing (encodeEncoding)
 import Native.Node.FileSystem
-
-type alias AccessConstant = Int
-type alias OpenConstant = Int
-type alias ModeConstant = Int
 
 type alias Descriptor = Int
 type alias Mode = Int
@@ -99,11 +95,11 @@ defaultOptions =
   { encoding = Nothing, mode = Nothing, flag = Nothing }
 
 {-| -}
-access: String -> AccessConstant -> Task Error ()
+access: String -> FileAccess -> Task Error ()
 access = Native.Node.FileSystem.access
 
 {-| -}
-accessSync: String -> AccessConstant -> Result Error ()
+accessSync: String -> FileAccess -> Result Error ()
 accessSync = Native.Node.FileSystem.accessSync
 
 {-| -}
@@ -267,11 +263,11 @@ mkdtempSync prefix encoding =
   Native.Node.FileSystem.mkdtempSync prefix (encodeEncoding encoding)
 
 {-| -}
-open: String -> String -> Int -> Task Error Descriptor
+open: String -> String -> FileOpen -> Task Error Descriptor
 open = Native.Node.FileSystem.open
 
 {-| -}
-openSync: String -> String -> Int -> Result Error Descriptor
+openSync: String -> String -> FileOpen -> Result Error Descriptor
 openSync = Native.Node.FileSystem.openSync
 
 {-| -}
@@ -381,119 +377,6 @@ utimes = Native.Node.FileSystem.utimes
 {-| -}
 utimesSync: String -> Int -> Int -> Result Error ()
 utimesSync = Native.Node.FileSystem.utimesSync
-
-{-| -}
-constants :
-  { access :
-    { execute : AccessConstant
-    , read : AccessConstant
-    , visible : AccessConstant
-    , write : AccessConstant
-    }
-  , open :
-    { append : OpenConstant
-    , create : OpenConstant
-    , direct : OpenConstant
-    , directory : OpenConstant
-    , failIfExists : OpenConstant
-    , noAtime : OpenConstant
-    , noFollow : OpenConstant
-    , nonblocking : OpenConstant
-    , readOnly : OpenConstant
-    , readWrite : OpenConstant
-    , symlink : OpenConstant
-    , synchronous : OpenConstant
-    , terminalDevice : OpenConstant
-    , truncate : OpenConstant
-    , writeOnly : OpenConstant
-    }
-  , modeType :
-    { blockOrientedFile : ModeConstant
-    , characterOrientedFile : ModeConstant
-    , directory : ModeConstant
-    , fifo : ModeConstant
-    , mask : ModeConstant
-    , regularFile : ModeConstant
-    , socket : ModeConstant
-    , symlink : ModeConstant
-    }
-  , modeAccess :
-    { group :
-      { all : ModeConstant
-      , execute : ModeConstant
-      , read : ModeConstant
-      , write : ModeConstant
-      }
-    , others :
-      { all : ModeConstant
-      , execute : ModeConstant
-      , read : ModeConstant
-      , write : ModeConstant
-      }
-    , owner :
-      { all : ModeConstant
-      , execute : ModeConstant
-      , read : ModeConstant
-      , write : ModeConstant
-      }
-    }
-  }
-constants =
-  { access =
-    { visible = Native.Node.FileSystem.F_OK
-    , read = Native.Node.FileSystem.R_OK
-    , write = Native.Node.FileSystem.W_OK
-    , execute = Native.Node.FileSystem.X_OK
-    }
-  , open =
-    { readOnly = Native.Node.FileSystem.O_RDONLY
-    , writeOnly = Native.Node.FileSystem.O_WRONLY
-    , readWrite = Native.Node.FileSystem.O_RDWR
-    , create = Native.Node.FileSystem.O_CREAT
-    , failIfExists = Native.Node.FileSystem.O_EXCL
-    , terminalDevice = Native.Node.FileSystem.O_NOCTTY
-    , truncate = Native.Node.FileSystem.O_TRUNC
-    , append = Native.Node.FileSystem.O_APPEND
-    , directory = Native.Node.FileSystem.O_DIRECTORY
-    , noAtime = Native.Node.FileSystem.O_NOATIME
-    , noFollow = Native.Node.FileSystem.O_NOFOLLOW
-    , synchronous = Native.Node.FileSystem.O_SYNC
-    , symlink = Native.Node.FileSystem.O_SYMLINK
-    , direct = Native.Node.FileSystem.O_DIRECT
-    , nonblocking = Native.Node.FileSystem.O_NONBLOCK
-    }
-  , modeType =
-    { mask = Native.Node.FileSystem.S_IFMT
-    , regularFile = Native.Node.FileSystem.S_IFREG
-    , directory = Native.Node.FileSystem.S_IFDIR
-    , characterOrientedFile = Native.Node.FileSystem.S_IFCHR
-    , blockOrientedFile = Native.Node.FileSystem.S_IFBLK
-    , fifo = Native.Node.FileSystem.S_IFIFO
-    , symlink = Native.Node.FileSystem.S_IFLNK
-    , socket = Native.Node.FileSystem.S_IFSOCK
-    }
-  , modeAccess =
-    { owner =
-      { all = Native.Node.FileSystem.S_IRWXU
-      , read = Native.Node.FileSystem.S_IRUSR
-      , write = Native.Node.FileSystem.S_IWUSR
-      , execute = Native.Node.FileSystem.S_IXUSR
-      }
-    , group =
-      { all = Native.Node.FileSystem.S_IRWXG
-      , read = Native.Node.FileSystem.S_IRGRP
-      , write = Native.Node.FileSystem.S_IWGRP
-      , execute = Native.Node.FileSystem.S_IXGRP
-      }
-    , others =
-      { all = Native.Node.FileSystem.S_IRWXO
-      , read = Native.Node.FileSystem.S_IROTH
-      , write = Native.Node.FileSystem.S_IWOTH
-      , execute = Native.Node.FileSystem.S_IXOTH
-      }
-    }
-  }
-
 
 -- -----------------------------------------------------------------------------
 -- JSON

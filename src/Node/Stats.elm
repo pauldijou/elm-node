@@ -7,6 +7,9 @@ module Node.Stats exposing
   , isSymbolicLink
   , isFIFO
   , isSocket
+  , is
+  , hasPermission
+  , toOctalPermissions
   , dev
   , ino
   , mode
@@ -32,10 +35,12 @@ Node API: https://nodejs.org/api/fs.html#fs_class_fs_stats
 
 Objects returned from fs.stat(), fs.lstat() and fs.fstat() and their synchronous counterparts are of this type.
 
-@docs Stats, isFile, isDirectory, isBlockDevice, isCharacterDevice, isSymbolicLink, isFIFO, isSocket, dev, ino, mode, nlink, uid, gid, rdev, size, blksize, blocks, atimeMs, mtimeMs, ctimeMs, birthtimeMs, atime, mtime, ctime, birthtime
+@docs Stats, isFile, isDirectory, isBlockDevice, isCharacterDevice, isSymbolicLink, isFIFO, isSocket, is, hasPermission, toOctalPermissions, dev, ino, mode, nlink, uid, gid, rdev, size, blksize, blocks, atimeMs, mtimeMs, ctimeMs, birthtimeMs, atime, mtime, ctime, birthtime
 -}
 
+import Bitwise
 import Date exposing (Date)
+import Node.Constants as Constants exposing (fileType)
 import Native.Node.Stats
 
 {-| -}
@@ -68,6 +73,27 @@ isFIFO = Native.Node.Stats.isFIFO
 {-| -}
 isSocket: Stats -> Bool
 isSocket = Native.Node.Stats.isSocket
+
+{-| -}
+is: Constants.FileType -> Stats -> Bool
+is ft stats =
+  (Bitwise.and fileType.mask (mode stats)) == ft
+
+{-| -}
+hasPermission: Constants.FileMode -> Stats -> Bool
+hasPermission fm stats =
+  (Bitwise.and (mode stats) fm) /= 0
+
+{-| -}
+toOctalPermissions: Stats -> String
+toOctalPermissions stats =
+  mode stats
+  |> Bitwise.and 511 -- int for octal 0777
+  |> toStringRadix 8
+  |> (++) "0"
+
+toStringRadix: Int -> Int -> String
+toStringRadix = Native.Node.Stats.toStringRadix
 
 {-| -}
 dev: Stats -> Int

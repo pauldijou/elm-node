@@ -1,11 +1,12 @@
 {
   "scripts": {
     "deps": "elm-github-install",
-    "test": "elm-ordeal test/NodeTest.elm --timeout=100"
+    "test": "elm-ordeal test/NodeTest.elm --timeout=100 --outputDir=."
   },
   "devDependencies": {
     "elm": "0.18.0",
     "elm-github-install": "1.1.0",
-    "elm-ordeal": "0.0.5"
+    "elm-ordeal": "0.0.5",
+    "mock-fs": "^4.4.1"
   }
 }

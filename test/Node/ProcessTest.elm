@@ -7,7 +7,6 @@ import Json.Decode as Decode
 
 import Ordeal exposing (..)
 
-import Node.ExitCodes as ExitCodes
 import Node.Path as Path
 import Node.Util as Util
 import Node.Process as Process
