@@ -1,4 +1,4 @@
-var _pauldijou$elm_node$Native_Node_Util = function () {
+const _pauldijou$elm_node$Native_Node_Util = function () {
   const util = require('util')
 
   function inspectLog(value, options) {

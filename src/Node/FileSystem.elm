@@ -77,6 +77,8 @@ import Task exposing (Task)
 import Json.Encode as Encode
 import Error exposing (Error)
 
+import Kernel.Helpers
+
 import Node.Constants exposing (FileAccess, FileOpen)
 import Node.Buffer exposing (Buffer)
 import Node.Stats exposing (Stats)
@@ -410,3 +412,7 @@ encodeSymlinkType stype =
 intOrNull: Maybe Int -> Encode.Value
 intOrNull =
   (Maybe.map Encode.int) >> (Maybe.withDefault Encode.null)
+
+noWarnings: String
+noWarnings =
+  Kernel.Helpers.noWarnings

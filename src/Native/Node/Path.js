@@ -1,4 +1,4 @@
-var _pauldijou$elm_node$Native_Node_Path = function () {
+const _pauldijou$elm_node$Native_Node_Path = function () {
   const path = require('path')
 
   function basename(p) {

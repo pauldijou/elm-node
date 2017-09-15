@@ -1,4 +1,4 @@
-var _pauldijou$elm_node$Native_Node_Buffer = function () {
+const _pauldijou$elm_node$Native_Node_Buffer = function () {
   const buffer = require('buffer')
   const Buffer = require('buffer').Buffer
   const helpers = _pauldijou$elm_kernel_helpers$Native_Kernel_Helpers

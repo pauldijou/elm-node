@@ -1,4 +1,4 @@
-var _pauldijou$elm_node$Native_Node_Process = function () {
+const _pauldijou$elm_node$Native_Node_Process = function () {
   const process = require('process')
   const helpers = _pauldijou$elm_kernel_helpers$Native_Kernel_Helpers
 

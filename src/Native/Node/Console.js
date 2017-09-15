@@ -1,4 +1,4 @@
-var _pauldijou$elm_node$Native_Node_Console = function () {
+const _pauldijou$elm_node$Native_Node_Console = function () {
   // const Console = require('console')
 
   function identity(a) { return a }

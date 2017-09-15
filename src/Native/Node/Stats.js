@@ -1,4 +1,4 @@
-var _pauldijou$elm_node$Native_Node_Stats = function () {
+const _pauldijou$elm_node$Native_Node_Stats = function () {
   function isSomething(name) {
     return function (stats) {
       return stats[name]()
