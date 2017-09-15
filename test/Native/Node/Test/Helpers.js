@@ -7,10 +7,14 @@ const _pauldijou$elm_node$Native_Node_Test_Helpers = function () {
 
   const uid = 1
   const gid = 2
-  const birthtime = new Date(100)
-  const ctime = new Date(200)
-  const mtime = new Date(300)
-  const atime = new Date(400)
+  const birthtimeMs = 100
+  const ctimeMs = 200
+  const mtimeMs = 300
+  const atimeMs = 400
+  const birthtime = new Date(birthtimeMs)
+  const ctime = new Date(ctimeMs)
+  const mtime = new Date(mtimeMs)
+  const atime = new Date(atimeMs)
 
   function normalize(options) {
     options.uid = uid
@@ -52,6 +56,10 @@ const _pauldijou$elm_node$Native_Node_Test_Helpers = function () {
   return {
     uid: uid,
     gid: gid,
+    birthtimeMs: birthtimeMs,
+    ctimeMs: ctimeMs,
+    mtimeMs: mtimeMs,
+    atimeMs: atimeMs,
     birthtime: birthtime,
     ctime: ctime,
     mtime: mtime,

@@ -23,7 +23,7 @@ Node API: https://nodejs.org/api/console.html
 -}
 
 import Json.Encode as Encode
-import Node.Types as Types
+import Node.Constants as Constants
 import Node.Util as Util
 import Node.Internals as Internals
 import Native.Node.Console
@@ -37,7 +37,7 @@ colors - if true, then the output will be styled with ANSI color codes. Defaults
 -}
 type alias Options =
   { showHidden: Bool
-  , depth: Types.Depth
+  , depth: Constants.Depth
   , colors: Bool
   }
 
@@ -45,7 +45,7 @@ type alias Options =
 defaultOptions: Options
 defaultOptions =
   { showHidden = False
-  , depth = Types.Depth 2
+  , depth = Constants.Depth 2
   , colors = False
   }
 

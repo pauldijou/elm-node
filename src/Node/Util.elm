@@ -15,7 +15,7 @@ The util module is primarily designed to support the needs of Node.js' own inter
 
 import Json.Encode as Encode
 
-import Node.Types exposing (Depth)
+import Node.Constants exposing (Depth)
 import Node.Internals as Internals exposing (encodeMaybeField, encodeDepth)
 import Native.Node.Util
 

@@ -2,7 +2,7 @@ module Node.Internals exposing (..)
 
 import Dict exposing (Dict)
 import Json.Encode as Encode
-import Node.Types exposing (..)
+import Node.Constants exposing (..)
 
 encodeDepth: Depth -> Encode.Value
 encodeDepth depth =

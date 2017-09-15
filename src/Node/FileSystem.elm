@@ -80,7 +80,7 @@ import Error exposing (Error)
 import Node.Constants exposing (FileAccess, FileOpen)
 import Node.Buffer exposing (Buffer)
 import Node.Stats exposing (Stats)
-import Node.Types exposing (Encoding)
+import Node.Constants exposing (Encoding)
 import Node.Internals exposing (encodeEncoding)
 import Native.Node.FileSystem
 

@@ -45,9 +45,6 @@ module Node.Buffer exposing
   , stringify3
   , stringify4
   , transcode
-  , maxLength
-  , maxStringLength
-  , inspectMaxBytes
   )
 
 {-|
@@ -56,14 +53,12 @@ Node API: https://nodejs.org/api/buffer.html
 @docs Buffer, Fill
 
 @docs alloc, alloc2, alloc3, allocUnsafe, allocUnsafeSlow, byteLength, byteLength2, byteLengthBuffer, byteLengthBuffer2, compare, compareRange, concat, concat2, fromBuffer, fromString, isEncoding, poolSize, setPoolSize, copy, copyTo, equals, fill, fill2, fill3, fill4, includes, includes2, includes3, indexOf, indexOf2, indexOf3, lastIndexOf, lastIndexOf2, lastIndexOf3, length, slice, slice2, slice3, toJSON, stringify, stringify2, stringify3, stringify4, transcode
-
-@docs maxLength, maxStringLength, inspectMaxBytes
 -}
 
 import Task exposing (Task)
 import Json.Encode as Encode
 
-import Node.Types exposing (Encoding, defaultEncoding)
+import Node.Constants exposing (Encoding, defaultEncoding)
 import Node.Internals exposing (encodeEncoding)
 import Native.Node.Buffer
 
@@ -303,25 +298,6 @@ transcode: Encoding -> Encoding -> Buffer -> Buffer
 transcode fromEnc toEnc buffer =
   Native.Node.Buffer.transcode (encodeEncoding fromEnc) (encodeEncoding toEnc) buffer
 
-
-
--- -----------------------------------------------------------------------------
--- Constants
-
-{-| -}
-maxLength: Int
-maxLength =
-  Native.Node.Buffer.maxLength
-
-{-| -}
-maxStringLength: Int
-maxStringLength =
-  Native.Node.Buffer.maxStringLength
-
-{-| -}
-inspectMaxBytes: Int
-inspectMaxBytes =
-  Native.Node.Buffer.inspectMaxBytes
 
 -- -----------------------------------------------------------------------------
 -- JSON

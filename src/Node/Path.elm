@@ -38,7 +38,7 @@ The path module provides utilities for working with file and directory paths.
 import Json.Encode as Encode
 import Json.Decode as Decode exposing (Decoder)
 
-import Node.Helpers as H
+import Node.Internals exposing (encodeMaybeField, encodeList)
 import Native.Node.Path
 
 {-| -}
@@ -100,7 +100,7 @@ isAbsolute = Native.Node.Path.isAbsolute
 {-| -}
 join: List String -> String
 join paths =
-  Native.Node.Path.join (H.encodeList Encode.string paths)
+  Native.Node.Path.join (encodeList Encode.string paths)
 
 {-| -}
 normalize: String -> String
@@ -121,7 +121,7 @@ relativeTo = flip relative
 {-| -}
 resolve: List String -> String
 resolve paths =
-  Native.Node.Path.resolve (H.encodeList Encode.string paths)
+  Native.Node.Path.resolve (encodeList Encode.string paths)
 
 {-| -}
 sep: String
@@ -171,11 +171,11 @@ resolve5 p1 p2 p3 p4 p5 = resolve [p1, p2, p3, p4, p5]
 
 encodeFormatted: Formatted -> Encode.Value
 encodeFormatted formatObject =
-  [ H.encodeMaybeField "dir" Encode.string formatObject.dir
-  , H.encodeMaybeField "root" Encode.string formatObject.root
-  , H.encodeMaybeField "base" Encode.string formatObject.base
-  , H.encodeMaybeField "name" Encode.string formatObject.name
-  , H.encodeMaybeField "ext" Encode.string formatObject.ext
+  [ encodeMaybeField "dir" Encode.string formatObject.dir
+  , encodeMaybeField "root" Encode.string formatObject.root
+  , encodeMaybeField "base" Encode.string formatObject.base
+  , encodeMaybeField "name" Encode.string formatObject.name
+  , encodeMaybeField "ext" Encode.string formatObject.ext
   ]
   |> List.filterMap identity
   |> Encode.object

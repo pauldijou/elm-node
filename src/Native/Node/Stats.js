@@ -5,13 +5,6 @@ var _pauldijou$elm_node$Native_Node_Stats = function () {
     }
   }
 
-  function isSymbolicLink(stats) {
-    if (typeof stats.isSymbolicLink === 'function') {
-      return stats.isSymbolicLink()
-    }
-    return false
-  }
-
   function getProperty(name) {
     return function (stats) {
       return stats[name]
@@ -28,7 +21,7 @@ var _pauldijou$elm_node$Native_Node_Stats = function () {
     isDirectory: isSomething('isDirectory'),
     isBlockDevice: isSomething('isBlockDevice'),
     isCharacterDevice: isSomething('isCharacterDevice'),
-    isSymbolicLink: isSymbolicLink,
+    isSymbolicLink: isSomething('isSymbolicLink'),
     isFIFO: isSomething('isFIFO'),
     isSocket: isSomething('isSocket'),
     dev: getProperty('dev'),

@@ -10,12 +10,11 @@
   "exposed-modules": [
     "Node.Buffer",
     "Node.Console",
-    "Node.ExitCodes",
+    "Node.Constants",
     "Node.FileSystem",
     "Node.Path",
     "Node.Process",
     "Node.Stats",
-    "Node.Types",
     "Node.Util"
   ],
   "native-modules": true,

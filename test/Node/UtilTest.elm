@@ -2,7 +2,7 @@ module Node.UtilTest exposing (tests)
 
 import Ordeal exposing (..)
 
-import Node.Types exposing (Depth(..))
+import Node.Constants exposing (Depth(..))
 import Node.Util as Util
 import Native.Node.Test.Helpers
 

@@ -1,27 +1,38 @@
 module Node.Constants exposing
-  ( ExitCode
+  ( Encoding(..)
+  , Depth(..)
+  , ExitCode
   , FileAccess
   , FileOpen
   , FileType
   , FileMode
+  , defaultEncoding
+  , defaultDepth
   , exitCodes
   , fileAccess
+  , allFileAccess
   , fileOpen
   , fileType
   , fileMode
-  , allFileAccess
+  , buffer
   )
 
 {-|
-@docs ExitCode, FileAccess, FileOpen, FileType, FileMode
+@docs Encoding, Depth, ExitCode, FileAccess, FileOpen, FileType, FileMode
 
-@docs exitCodes, fileAccess, fileOpen, fileType, fileMode
+@docs defaultEncoding, defaultDepth, exitCodes, fileAccess, fileOpen, fileType, fileMode, buffer
 
 @docs allFileAccess
 -}
 
 import Bitwise
 import Native.Node.FileSystem
+
+{-| -}
+type Encoding = Ascii | Utf8 | Utf16le | Ucs2 | Base64 | Latin1 | Binary | Hex
+
+{-| Specifies the number of times to recurse while formatting the object. This is useful for inspecting large complicated objects. -}
+type Depth = Depth Int | Infinite
 
 {-| -}
 type alias ExitCode = Int
@@ -33,6 +44,15 @@ type alias FileOpen = Int
 type alias FileType = Int
 {-| -}
 type alias FileMode = Int
+
+
+{-| -}
+defaultEncoding: Encoding
+defaultEncoding = Utf8
+
+{-| -}
+defaultDepth: Depth
+defaultDepth = Depth 2
 
 {-|
 Node API: https://nodejs.org/docs/latest/api/process.html#process_exit_codes
@@ -189,4 +209,22 @@ fileMode =
     , write = Native.Node.FileSystem.S_IWOTH
     , execute = Native.Node.FileSystem.S_IXOTH
     }
+  }
+
+{-|
+maxLength: The largest size allowed for a single Buffer instance. On 32-bit architectures, this value is (2^30)-1 (~1GB). On 64-bit architectures, this value is (2^31)-1 (~2GB).
+
+maxStringLength: The largest length allowed for a single string instance. Represents the largest length that a string primitive can have, counted in UTF-16 code units. Added in 8.2.0 (will be 0 before that)
+
+inspectMaxBytes: Returns the maximum number of bytes that will be returned when buf.inspect() is called. This can be overridden by user modules. See util.inspect() for more details on buf.inspect() behavior.
+-}
+buffer:
+  { maxLength: Int
+  , maxStringLength: Int
+  , inspectMaxBytes: Int
+  }
+buffer =
+  { maxLength = Native.Node.Buffer.maxLength
+  , maxStringLength = Native.Node.Buffer.maxStringLength
+  , inspectMaxBytes = Native.Node.Buffer.inspectMaxBytes
   }

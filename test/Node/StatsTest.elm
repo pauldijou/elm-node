@@ -27,6 +27,10 @@ commonTest stats =
   , Stats.ctime stats |> shouldEqual Native.Node.Test.Helpers.ctime
   , Stats.mtime stats |> shouldEqual Native.Node.Test.Helpers.mtime
   , Stats.atime stats |> shouldEqual Native.Node.Test.Helpers.atime
+  , Stats.birthtimeMs stats |> shouldEqual Native.Node.Test.Helpers.birthtimeMs
+  , Stats.ctimeMs stats |> shouldEqual Native.Node.Test.Helpers.ctimeMs
+  , Stats.mtimeMs stats |> shouldEqual Native.Node.Test.Helpers.mtimeMs
+  , Stats.atimeMs stats |> shouldEqual Native.Node.Test.Helpers.atimeMs
   ]
 
 isFile: Stats -> Expectation
