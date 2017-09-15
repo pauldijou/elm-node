@@ -27,6 +27,7 @@ module Node.Constants exposing
 
 import Bitwise
 import Native.Node.FileSystem
+import Native.Node.Buffer
 
 {-| -}
 type Encoding = Ascii | Utf8 | Utf16le | Ucs2 | Base64 | Latin1 | Binary | Hex
