@@ -3,7 +3,6 @@ module Node.Process exposing
   , Hrtime
   , MemoryUsage
   , Release
-  , Signal(SIGHUP, SIGINT, SIGQUIT, SIGILL, SIGABRT, SIGFPE, SIGKILL, SIGSEGV, SIGPIPE, SIGALRM, SIGTERM, SIGUSR1, SIGUSR2, SIGCHLD, SIGCONT, SIGSTOP, SIGTSTP, SIGTTIN, SIGTTOU)
   , abort
   , arch
   , argv
@@ -39,7 +38,7 @@ Node API: https://nodejs.org/docs/latest/api/process.html
 
 # Types
 
-@docs CpuUsage, Hrtime, MemoryUsage, Release, Signal
+@docs CpuUsage, Hrtime, MemoryUsage, Release
 
 # Functions
 
@@ -53,6 +52,8 @@ import Json.Decode as Decode exposing (Decoder)
 
 import Kernel.Helpers
 
+import Node.Constants exposing (Signal)
+import Node.Internals as I
 import Native.Node.Process
 
 {-| -}
@@ -72,9 +73,6 @@ type alias Release =
   , libUrl: Maybe String
   , lts: Maybe String
   }
-
-{-| -}
-type Signal = SIGHUP | SIGINT | SIGQUIT | SIGILL | SIGABRT | SIGFPE | SIGKILL | SIGSEGV | SIGPIPE | SIGALRM | SIGTERM | SIGUSR1 | SIGUSR2 | SIGCHLD | SIGCONT | SIGSTOP | SIGTSTP | SIGTTIN | SIGTTOU
 
 {-| -}
 abort: Task Never ()
@@ -154,7 +152,7 @@ kill = Native.Node.Process.kill
 {-| -}
 killWith: Signal -> Int -> Task Never ()
 killWith signal code =
-  Native.Node.Process.killWith (encodeSignal signal) code
+  Native.Node.Process.killWith (I.encodeSignal signal) code
 
 {-| -}
 memoryUsage: Task Never MemoryUsage
@@ -210,29 +208,6 @@ versions =
 
 -- -----------------------------------------------------------------------------
 -- JSON
-
-encodeSignal: Signal -> Encode.Value
-encodeSignal sig =
-  case sig of
-  SIGHUP  -> Encode.string "SIGHUP"
-  SIGINT  -> Encode.string "SIGINT"
-  SIGQUIT -> Encode.string "SIGQUIT"
-  SIGILL  -> Encode.string "SIGILL"
-  SIGABRT -> Encode.string "SIGABRT"
-  SIGFPE  -> Encode.string "SIGFPE"
-  SIGKILL -> Encode.string "SIGKILL"
-  SIGSEGV -> Encode.string "SIGSEGV"
-  SIGPIPE -> Encode.string "SIGPIPE"
-  SIGALRM -> Encode.string "SIGALRM"
-  SIGTERM -> Encode.string "SIGTERM"
-  SIGUSR1 -> Encode.string "SIGUSR1"
-  SIGUSR2 -> Encode.string "SIGUSR2"
-  SIGCHLD -> Encode.string "SIGCHLD"
-  SIGCONT -> Encode.string "SIGCONT"
-  SIGSTOP -> Encode.string "SIGSTOP"
-  SIGTSTP -> Encode.string "SIGTSTP"
-  SIGTTIN -> Encode.string "SIGTTIN"
-  SIGTTOU -> Encode.string "SIGTTOU"
 
 decoderRelease: Decoder Release
 decoderRelease =

@@ -9,9 +9,11 @@
   ],
   "exposed-modules": [
     "Node.Buffer",
+    "Node.ChildProcess",
     "Node.Console",
     "Node.Constants",
     "Node.FileSystem",
+    "Node.Globals",
     "Node.Path",
     "Node.Process",
     "Node.Stats",

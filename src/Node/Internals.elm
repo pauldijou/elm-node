@@ -22,6 +22,29 @@ encodeEncoding encoding =
     Binary  -> Encode.string "binary"
     Hex     -> Encode.string "hex"
 
+encodeSignal: Signal -> Encode.Value
+encodeSignal sig =
+  case sig of
+    SIGHUP  -> Encode.string "SIGHUP"
+    SIGINT  -> Encode.string "SIGINT"
+    SIGQUIT -> Encode.string "SIGQUIT"
+    SIGILL  -> Encode.string "SIGILL"
+    SIGABRT -> Encode.string "SIGABRT"
+    SIGFPE  -> Encode.string "SIGFPE"
+    SIGKILL -> Encode.string "SIGKILL"
+    SIGSEGV -> Encode.string "SIGSEGV"
+    SIGPIPE -> Encode.string "SIGPIPE"
+    SIGALRM -> Encode.string "SIGALRM"
+    SIGTERM -> Encode.string "SIGTERM"
+    SIGUSR1 -> Encode.string "SIGUSR1"
+    SIGUSR2 -> Encode.string "SIGUSR2"
+    SIGCHLD -> Encode.string "SIGCHLD"
+    SIGCONT -> Encode.string "SIGCONT"
+    SIGSTOP -> Encode.string "SIGSTOP"
+    SIGTSTP -> Encode.string "SIGTSTP"
+    SIGTTIN -> Encode.string "SIGTTIN"
+    SIGTTOU -> Encode.string "SIGTTOU"
+
 encodeMaybe: (a -> Encode.Value) -> Maybe a -> Encode.Value
 encodeMaybe encoder value =
   value |> Maybe.map encoder |> Maybe.withDefault Encode.null

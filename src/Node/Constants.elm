@@ -6,6 +6,7 @@ module Node.Constants exposing
   , FileOpen
   , FileType
   , FileMode
+  , Signal(..)
   , defaultEncoding
   , defaultDepth
   , exitCodes
@@ -15,10 +16,11 @@ module Node.Constants exposing
   , fileType
   , fileMode
   , buffer
+
   )
 
 {-|
-@docs Encoding, Depth, ExitCode, FileAccess, FileOpen, FileType, FileMode
+@docs Encoding, Depth, ExitCode, FileAccess, FileOpen, FileType, FileMode, Signal
 
 @docs defaultEncoding, defaultDepth, exitCodes, fileAccess, fileOpen, fileType, fileMode, buffer
 
@@ -30,7 +32,15 @@ import Native.Node.FileSystem
 import Native.Node.Buffer
 
 {-| -}
-type Encoding = Ascii | Utf8 | Utf16le | Ucs2 | Base64 | Latin1 | Binary | Hex
+type Encoding
+  = Ascii
+  | Utf8
+  | Utf16le
+  | Ucs2
+  | Base64
+  | Latin1
+  | Binary
+  | Hex
 
 {-| Specifies the number of times to recurse while formatting the object. This is useful for inspecting large complicated objects. -}
 type Depth = Depth Int | Infinite
@@ -46,6 +56,27 @@ type alias FileType = Int
 {-| -}
 type alias FileMode = Int
 
+{-| -}
+type Signal
+  = SIGHUP
+  | SIGINT
+  | SIGQUIT
+  | SIGILL
+  | SIGABRT
+  | SIGFPE
+  | SIGKILL
+  | SIGSEGV
+  | SIGPIPE
+  | SIGALRM
+  | SIGTERM
+  | SIGUSR1
+  | SIGUSR2
+  | SIGCHLD
+  | SIGCONT
+  | SIGSTOP
+  | SIGTSTP
+  | SIGTTIN
+  | SIGTTOU
 
 {-| -}
 defaultEncoding: Encoding

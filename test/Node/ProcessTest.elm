@@ -80,9 +80,9 @@ tests =
       )
       |> Task.andThen Process.cpuUsageSince
       |> shouldSucceedAnd (\usage ->
-        if ((usage.user == 0 || usage.user == 4000)  && usage.system == 0)
+        if usage.user >= 0 && usage.system >= 0
         then success
-        else failure <| "CPU usages should be zero but is:" ++ (toString usage)
+        else failure <| "CPU usages cannot be negative but is:" ++ (toString usage)
       )
     )
     , test "cwd" (
@@ -91,9 +91,8 @@ tests =
     , test "env" (
       success
       |> and (Process.env |> Dict.get "USER" |> shouldBeJust)
-      |> and (Process.env |> Dict.get "LANGUAGE" |> shouldBeJust)
-      |> and (Process.env |> Dict.get "npm_package_scripts_test" |> shouldBeJust)
       |> and (Process.env |> Dict.get "npm_lifecycle_event" |> shouldEqual (Just "test"))
+      |> and (Process.env |> Dict.get "npm_package_scripts_test" |> shouldBeJust)
     )
     , test "execArgv" (
       Process.execArgv |> shouldEqual []
