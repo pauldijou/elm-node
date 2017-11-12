@@ -1,7 +1,8 @@
 {
   "scripts": {
     "deps": "elm-github-install",
-    "test": "elm-ordeal test/NodeTest.elm --timeout=100 --outputDir=."
+    "test": "elm-ordeal test/NodeTest.elm --timeout=100 --outputDir=.",
+    "start": "elm-make ./test/NodeServer.elm --output=./dist/NodeServer.js && node ./test/nodeServer.js"
   },
   "devDependencies": {
     "elm": "0.18.0",
